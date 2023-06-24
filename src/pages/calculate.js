@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import "../components/style.css";
 import Button from "@mui/material/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
 export function Calculate() {
   // const handleCLick = () => {
@@ -13,31 +15,39 @@ export function Calculate() {
     <div className="App">
       <header className="App-header">
         <div className="container">
-          <div className="row">
-            <div className="form_input">
-              <input
-                type="text"
-                className="form-control custom-text-field"
-                placeholder="Course Title"
-              />
-            </div>
-            <div className="form_input">
-              <input
-                type="text"
-                className="form-control custom-text-field"
-                placeholder="Grade"
-                required
-              />
-            </div>
-            <div className="form_input">
-              <input
-                type="text"
-                className="form-control custom-text-field"
-                placeholder="Units"
-                required
-              />
-            </div>
-          </div>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
+                <div className="form_input">
+                  <input
+                    type="text"
+                    className="form-control custom-text-field"
+                    placeholder="Course Title"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div className="form_input">
+                  <input
+                    type="text"
+                    className="form-control custom-text-field"
+                    placeholder="Grade"
+                    required
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div className="form_input">
+                  <input
+                    type="text"
+                    className="form-control custom-text-field"
+                    placeholder="Units"
+                    required
+                  />
+                </div>
+              </Grid>
+            </Grid>
+          </Box>
         </div>
 
         <Link to="/pages/CGPA_NOTE">
