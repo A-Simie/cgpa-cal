@@ -1,0 +1,67 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 20vmin;
+  width: 70vmin;
+  margin-top: 6vh;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.App-header {
+  min-height: 100vh;
+  background-color: #282c34;
+  background-image: linear-gradient(to bottom, #6f1ab6, #3d1766);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  color: white;
+}
+
+.App-link {
+  color: #c7a50e70;
+}
+
+.CGPACAL {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40%;
+}
+
+.bottomText {
+  margin-top: auto;
+}
+.Typography {
+  margin-top: 7vh;
+}
+.Typography .variant_p {
+  text-align: left;
+}
+
+.form_input {
+  font-family: Poppins, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-text-field {
+  background-color: white;
+  border-radius: 300px;
+  border: none;
+  margin: 2px 5px;
+  padding: 8px 12px;
+  width: 3vw;
+  border-radius: 30px;
+  outline: none;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
