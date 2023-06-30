@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "../components/style.css";
 import Button from "@mui/material/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,10 +5,9 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 export function Calculate() {
-  // const handleCLick = () => {
-  //   console.log("ijust clicked on the button");
-
-  // };
+  const handleAddCourse = () => {
+    console.log("ijust clicked on the add button");
+  };
 
   return (
     <div className="App">
@@ -50,21 +48,23 @@ export function Calculate() {
           </Box>
         </div>
 
-        <Link to="/pages/CGPA_NOTE">
-          <Button
-            className="button-app"
-            variant="contained"
-            style={{
-              backgroundColor: "#DDB76F",
-              fontWeight: "bolder",
-              fontSize: "17px",
-              borderRadius: "14%",
-              marginTop: "15%",
-            }}
-          >
-            + Add Course
-          </Button>
-        </Link>
+        <Button
+          className="button-app"
+          variant="contained"
+          style={{
+            backgroundColor: "#DDB76F",
+            fontWeight: "bolder",
+            fontSize: "17px",
+            borderRadius: "14%",
+            marginTop: "15%",
+          }}
+          onClick={() => {
+            handleAddCourse();
+          }}
+        >
+          + Add Course
+        </Button>
+
         <br />
         <span className="bottomText">Produced by A.Simie</span>
       </header>
