@@ -22,7 +22,7 @@ export function Calculate() {
   const renderFields = () =>
     fields.map((field) => (
       <>
-        <Grid item xs={4}>
+        <Grid item xs={4} key={field.id}>
           <div className="form_input">
             <input
               type="text"
