@@ -21,8 +21,8 @@ export function Calculate() {
 
   const renderFields = () =>
     fields.map((field) => (
-      <>
-        <Grid item xs={4} key={field.id}>
+      <React.Fragment key={field.id}>
+        <Grid item xs={4}>
           <div className="form_input">
             <input
               type="text"
@@ -56,7 +56,7 @@ export function Calculate() {
             />
           </div>
         </Grid>
-      </>
+      </React.Fragment>
     ));
 
   const handleAddField = () => {
@@ -64,9 +64,13 @@ export function Calculate() {
     setFields([...fields, { id: lastId + 1 }]);
   };
 
-  const handleDeleteField = (idToDelete) => {
-    const updatedFields = fields.filter((field) => field.id !== idToDelete);
+  const handleDeleteField = () => {
+    const updatedFields = fields.filter(
+      (field) => field.id !== fields.length - 1
+    );
     setFields(updatedFields);
+    console.log(fields.length - 1);
+    console.log(fields);
   };
 
   return (
@@ -94,20 +98,24 @@ export function Calculate() {
         >
           + Add Course
         </Button>
-        <Button
-          className="button-app"
-          variant="contained"
-          style={{
-            backgroundColor: "#DDB76F",
-            fontWeight: "bolder",
-            fontSize: "17px",
-            borderRadius: "14%",
-            marginTop: "15%",
-          }}
-          onClick={handleDeleteField}
-        >
-          - Delete Course
-        </Button>
+        {fields.length > 1 ? (
+          <Button
+            className="button-app"
+            variant="contained"
+            style={{
+              backgroundColor: "#DDB76F",
+              fontWeight: "bolder",
+              fontSize: "17px",
+              borderRadius: "14%",
+              marginTop: "15%",
+            }}
+            onClick={handleDeleteField}
+          >
+            - Delete Course
+          </Button>
+        ) : (
+          <></>
+        )}
 
         <br />
         <span className="bottomText">Produced by A.Simie</span>
