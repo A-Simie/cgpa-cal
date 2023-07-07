@@ -56,7 +56,6 @@ export function CGPA_NOTE() {
           <span className="bottomText">Produced by A.Simie</span>
         </header>
       </div>
-      <Link to="/">Go back</Link>
     </div>
   );
 }
