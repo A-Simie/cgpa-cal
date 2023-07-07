@@ -69,7 +69,9 @@ export function Calculate() {
       (field) => field.id !== fields.length - 1
     );
     setFields(updatedFields);
-    console.log(fields.length - 1);
+  };
+
+  const handleCalculate = () => {
     console.log(fields);
   };
 
@@ -99,20 +101,37 @@ export function Calculate() {
           + Add Course
         </Button>
         {fields.length > 1 ? (
-          <Button
-            className="button-app"
-            variant="contained"
-            style={{
-              backgroundColor: "#DDB76F",
-              fontWeight: "bolder",
-              fontSize: "17px",
-              borderRadius: "14%",
-              marginTop: "15%",
-            }}
-            onClick={handleDeleteField}
-          >
-            - Delete Course
-          </Button>
+          <React.Fragment>
+            <Button
+              className="button-app"
+              variant="contained"
+              style={{
+                backgroundColor: "#CD0404",
+                fontWeight: "bolder",
+                fontSize: "17px",
+                borderRadius: "12%",
+                marginTop: "6%",
+              }}
+              onClick={handleDeleteField}
+            >
+              Delete Course
+            </Button>
+            <Button
+              className="button-app"
+              variant="contained"
+              style={{
+                backgroundColor: "#04CD18",
+                fontWeight: "bolder",
+                fontSize: "17px",
+                borderRadius: "12%",
+                marginTop: "6%",
+              }}
+              onClick={handleCalculate}
+              size="large"
+            >
+              Calculate CGPA
+            </Button>
+          </React.Fragment>
         ) : (
           <></>
         )}
