@@ -36,7 +36,7 @@ export function Calculate() {
           <div className="form_input">
             <input
               name={`grade${field.id}`}
-              type="text"
+              type="number"
               className="form-control custom-text-field"
               placeholder="Grade"
               onChange={(event) => handleInputChange(field.id, event)}
@@ -48,7 +48,7 @@ export function Calculate() {
           <div className="form_input">
             <input
               name={`unit${field.id}`}
-              type="text"
+              type="number"
               className="form-control custom-text-field"
               placeholder="Units"
               onChange={(event) => handleInputChange(field.id, event)}
@@ -79,7 +79,7 @@ export function Calculate() {
     <div className="App">
       <header className="App-header">
         <div className="container">
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ flexGrow: 1, marginTop: "10%" }}>
             <Grid container spacing={2}>
               {renderFields()}
             </Grid>
