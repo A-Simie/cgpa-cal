@@ -73,6 +73,35 @@ export function Calculate() {
 
   const handleCalculate = () => {
     console.log(fields);
+
+    const GradingSystem = {
+      A: { min: 70, max: 100, point: 5 },
+      B: { min: 60, max: 69, point: 4 },
+      C: { min: 50, max: 59, point: 3 },
+      D: { min: 45, max: 49, point: 2 },
+      E: { min: 40, max: 44, point: 1 },
+      F: { min: 0, max: 39, point: 0 },
+    };
+
+    // let totalQualityPoints = 0;
+    // let totalUnits = 0;
+
+    // fields.forEach((course, index) => {
+    //   const grade = course.grade[index];
+    //   const unit = course.unit[index];
+
+    //   console.log(grade);
+    //   console.log(unit);
+
+    //   // if (grade in GradingSystem) {
+    //   //   const gradePoint = GradingSystem[grade].point;
+    //   //   totalQualityPoints += gradePoint * unit;
+    //   //   totalUnits += unit;
+    //   // }
+    // });
+
+    // console.log(totalQualityPoints);
+    // console.log(totalUnits);
   };
 
   return (
