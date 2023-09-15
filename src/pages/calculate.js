@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 
 export function Calculate() {
   const [fields, setFields] = useState([{ id: 0 }]);
+  const [cgpaScore, setCgpaScore] = useState("");
 
   const handleInputChange = (id, event) => {
     const updatedFields = fields.map((field) => {
@@ -71,37 +72,99 @@ export function Calculate() {
     setFields(updatedFields);
   };
 
+  // Grading system
+  const GradingSystem = {
+    A: { min: 70, max: 100, point: 5 },
+    B: { min: 60, max: 69, point: 4 },
+    C: { min: 50, max: 59, point: 3 },
+    D: { min: 45, max: 49, point: 2 },
+    E: { min: 40, max: 44, point: 1 },
+    F: { min: 0, max: 39, point: 0 },
+  };
+
+  const Multiply = (points, totalUnit) => {
+    const resultArray = fields.map((item, index) => {
+      // Extract the unit value from the first array
+      const unitKey = `unit${index}`;
+      const unitValue = parseInt(item[unitKey], 10);
+      // Find the corresponding object in the second array
+      const pointArray = points[index];
+
+      // Multiply the unit value with the point from the second array
+      const multipliedValue = unitValue * pointArray.point;
+
+      // Create a new object with the multiplied value
+      return {
+        id: item.id,
+        result: multipliedValue,
+      };
+    });
+    console.log(resultArray);
+    const totalResult = resultArray.reduce(
+      (accumulator, item) => accumulator + item.result,
+      0
+    );
+    console.log(totalResult);
+    const CGPA = totalResult / totalUnit;
+    setCgpaScore(CGPA.toFixed(2));
+    console.log(CGPA);
+  };
+
   const handleCalculate = () => {
+    // fields: is the list of score inputed in the text-field
     console.log(fields);
 
-    const GradingSystem = {
-      A: { min: 70, max: 100, point: 5 },
-      B: { min: 60, max: 69, point: 4 },
-      C: { min: 50, max: 59, point: 3 },
-      D: { min: 45, max: 49, point: 2 },
-      E: { min: 40, max: 44, point: 1 },
-      F: { min: 0, max: 39, point: 0 },
-    };
+    const points = [];
+    const unitList = [];
 
-    // let totalQualityPoints = 0;
-    // let totalUnits = 0;
+    for (const entry of fields) {
+      // dynamically constructing the property key
+      // so that each grade inserted can be individually parsed
+      // into the Grading system deifned
+      const gradeKey = `grade${entry.id}`;
+      console.log(gradeKey);
 
-    // fields.forEach((course, index) => {
-    //   const grade = course.grade[index];
-    //   const unit = course.unit[index];
+      const unitKey = `unit${entry.id}`;
 
-    //   console.log(grade);
-    //   console.log(unit);
+      if (unitKey in entry) {
+        const unitEach = parseFloat(entry[unitKey]);
+        unitList.push(unitEach);
+        console.log(unitEach);
+        console.log(unitList);
+      }
 
-    //   // if (grade in GradingSystem) {
-    //   //   const gradePoint = GradingSystem[grade].point;
-    //   //   totalQualityPoints += gradePoint * unit;
-    //   //   totalUnits += unit;
-    //   // }
-    // });
+      if (gradeKey in entry) {
+        const score = parseFloat(entry[gradeKey]);
+        console.log(score);
 
-    // console.log(totalQualityPoints);
-    // console.log(totalUnits);
+        let gradeFound = false;
+
+        for (const grade in GradingSystem) {
+          if (
+            score >= GradingSystem[grade].min &&
+            score <= GradingSystem[grade].max
+          ) {
+            // with individual score gotten, i looped through the grading system so
+            // as to get the individual grade for the score then i pushed it into a
+            // array
+            points.push({ score, grade, point: GradingSystem[grade].point });
+            console.log(points);
+            gradeFound = true;
+            break; // Exit the inner loop when a matching grade is found
+          }
+        }
+
+        if (!gradeFound) {
+          points.push({ score, grade: "Invalid", point: "Invalid" });
+        }
+      }
+    }
+    const totalUnit = unitList.reduce((a, b) => {
+      return a + b;
+    });
+    console.log(totalUnit);
+
+    Multiply(points, totalUnit);
   };
 
   return (
@@ -164,7 +227,7 @@ export function Calculate() {
         ) : (
           <></>
         )}
-
+        <h1>{cgpaScore}</h1>
         <br />
         <span className="bottomText">Produced by A.Simie</span>
       </header>
