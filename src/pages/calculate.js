@@ -265,7 +265,7 @@ export function Calculate() {
           <></>
         )}
         <h1 className="yourCGPA">YOUR CGPA</h1>
-        <h1>{cgpaScore}</h1>
+        <h1 className="value">{cgpaScore}</h1>
         <br />
         <span className="bottomText">Produced by A.Simie</span>
       </header>
