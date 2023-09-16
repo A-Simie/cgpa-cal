@@ -68,3 +68,9 @@
 .error {
   border: 2px solid red;
 }
+
+.yourCGPA {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  margin-top: 5%;
+}

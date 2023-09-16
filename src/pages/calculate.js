@@ -66,6 +66,9 @@ export function Calculate() {
   const handleAddField = () => {
     const lastId = fields[fields.length - 1].id;
     setFields([...fields, { id: lastId + 1 }]);
+
+    const num = 0;
+    setCgpaScore(num.toFixed(2));
   };
 
   const handleDeleteField = () => {
@@ -73,6 +76,9 @@ export function Calculate() {
       (field) => field.id !== fields.length - 1
     );
     setFields(updatedFields);
+
+    const num = 0;
+    setCgpaScore(num.toFixed(2));
   };
 
   // Grading system
@@ -258,6 +264,7 @@ export function Calculate() {
         ) : (
           <></>
         )}
+        <h1 className="yourCGPA">YOUR CGPA</h1>
         <h1>{cgpaScore}</h1>
         <br />
         <span className="bottomText">Produced by A.Simie</span>
