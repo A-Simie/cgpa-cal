@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Swal from "sweetalert2";
 
 export function Calculate() {
   // check deployment now
@@ -41,7 +42,7 @@ export function Calculate() {
               name={`grade${field.id}`}
               type="number"
               className="form-control custom-text-field"
-              placeholder="Grade"
+              placeholder="Score *"
               onChange={(event) => handleInputChange(field.id, event)}
               required
             />
@@ -53,7 +54,7 @@ export function Calculate() {
               name={`unit${field.id}`}
               type="number"
               className="form-control custom-text-field"
-              placeholder="Units"
+              placeholder="Units *"
               onChange={(event) => handleInputChange(field.id, event)}
               required
             />
@@ -114,7 +115,9 @@ export function Calculate() {
 
   const handleCalculate = () => {
     // fields: is the list of score inputed in the text-field
-    console.log(fields);
+
+    // Fields validation flag
+    let isValid = true;
 
     const points = [];
     const unitList = [];
@@ -133,12 +136,25 @@ export function Calculate() {
         unitList.push(unitEach);
         console.log(unitEach);
         console.log(unitList);
+        if (isNaN(unitEach)) {
+          isValid = false;
+        }
+        if (unitEach < 0) {
+          isValid = false;
+        }
       }
 
       if (gradeKey in entry) {
         const score = parseFloat(entry[gradeKey]);
         console.log(score);
-
+        if (isNaN(score)) {
+          isValid = false;
+        }
+        if (score > 100 || score < 0) {
+          // If score is greater than 100, mark it as invalid and set isValid to false
+          isValid = false;
+          break;
+        }
         let gradeFound = false;
 
         for (const grade in GradingSystem) {
@@ -161,12 +177,25 @@ export function Calculate() {
         }
       }
     }
-    const totalUnit = unitList.reduce((a, b) => {
-      return a + b;
-    });
-    console.log(totalUnit);
+    console.log(isValid);
 
-    Multiply(points, totalUnit);
+    if (isValid) {
+      const totalUnit = unitList.reduce((a, b) => {
+        return a + b;
+      });
+      console.log(totalUnit);
+
+      Multiply(points, totalUnit);
+    } else {
+      const num = 0;
+      setCgpaScore(num.toFixed(2));
+
+      Swal.fire({
+        title: "Invalid Input",
+        icon: "error",
+        text: "Please fill in all required fields and ensure the score or Unit is between 0 and 100",
+      });
+    }
   };
 
   return (
