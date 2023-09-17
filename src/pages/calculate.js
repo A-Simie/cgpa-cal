@@ -20,7 +20,6 @@ export function Calculate() {
       return field;
     });
     setFields(updatedFields);
-    console.log(updatedFields);
   };
 
   const renderFields = () =>
@@ -108,15 +107,12 @@ export function Calculate() {
         result: multipliedValue,
       };
     });
-    console.log(resultArray);
     const totalResult = resultArray.reduce(
       (accumulator, item) => accumulator + item.result,
       0
     );
-    console.log(totalResult);
     const CGPA = totalResult / totalUnit;
     setCgpaScore(CGPA.toFixed(2));
-    console.log(CGPA);
   };
 
   const handleCalculate = () => {
@@ -133,15 +129,12 @@ export function Calculate() {
       // so that each grade inserted can be individually parsed
       // into the Grading system deifned
       const gradeKey = `grade${entry.id}`;
-      console.log(gradeKey);
 
       const unitKey = `unit${entry.id}`;
 
       if (unitKey in entry) {
         const unitEach = parseFloat(entry[unitKey]);
         unitList.push(unitEach);
-        console.log(unitEach);
-        console.log(unitList);
         if (isNaN(unitEach)) {
           isValid = false;
         }
@@ -152,7 +145,6 @@ export function Calculate() {
 
       if (gradeKey in entry) {
         const score = parseFloat(entry[gradeKey]);
-        console.log(score);
         if (isNaN(score)) {
           isValid = false;
         }
@@ -172,7 +164,6 @@ export function Calculate() {
             // as to get the individual grade for the score then i pushed it into a
             // array
             points.push({ score, grade, point: GradingSystem[grade].point });
-            console.log(points);
             gradeFound = true;
             break; // Exit the inner loop when a matching grade is found
           }
@@ -183,13 +174,11 @@ export function Calculate() {
         }
       }
     }
-    console.log(isValid);
 
     if (isValid) {
       const totalUnit = unitList.reduce((a, b) => {
         return a + b;
       });
-      console.log(totalUnit);
 
       Multiply(points, totalUnit);
     } else {
